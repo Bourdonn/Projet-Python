@@ -1,4 +1,4 @@
-import numpy as np
+from class_room import *
 
 # n is a string which values vary from 0 to 9 and from A to F
 def HexaToBin(n):
@@ -21,12 +21,13 @@ class Robot:
     
     You can find a small description for each one just after its definitions.
     """
-    __position = []
+    __position = -1
     __color = ''
 
     def __init__(self, data):
-        self.__position = [data[1], data[2]]
+        self.__position = data[1]
         self.__color = data[0]
+        self.__room = Room(data)
 
     def get_position(self):
         return self.__position
@@ -105,8 +106,8 @@ class Robot:
             else:
                 res[C+direction] = dist[C+direction]
         return res
-
-    def compute_move(self,direction,dist,room,path,por):
+	
+    def move(self,direction,dist,room,path,por):
         """
         move gets a robot to move. It changes it's position, cleans the
         room wherever it goes, and saves it's movement in the vector path.
