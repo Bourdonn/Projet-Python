@@ -10,7 +10,7 @@ def HexaToBin(n):
 
 class Robot:
     """
-    The Robot class contains the position and the color of the robot. 
+    The Robot class contains the position, the color of the robot and a room object representing walls information. 
     Methods:
         get_position
         set_position
@@ -24,10 +24,10 @@ class Robot:
     __position = -1
     __color = ''
 
-    def __init__(self, data):
+    def __init__(self, data,room):
         self.__position = data[1]
         self.__color = data[0]
-        self.__room = Room(data)
+        self.__room = room
 
     def get_position(self):
         return self.__position

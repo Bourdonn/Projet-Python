@@ -21,16 +21,20 @@ def ReadFile(file_name):
         for j in list(line):
             obstacles.append(j)
     robots = []
-    room = [0 for i in range(n*m)]
+    visited = [0 for i in range(n*m)]
     for i in range(nb_rob):
         line = file.readline().strip().split()
         index = m*int(line[1])+int(line[2])
         robots.append([line[0],index])
-        room[index] = 1
+        visited[index] = 1
     file.close()
     return(n,m,nb_rob,obstacles,robots,visited)
 
 # pour l'affichage:    plt.imshow(a)
 # Telecharger le package import matplotlib.pyplot as plt 
 
-    
+[n,m,nb_rob,obstacles,robots,visited] = ReadFile("Case_Aspi_R_3.txt")
+print(obstacles)
+
+
+

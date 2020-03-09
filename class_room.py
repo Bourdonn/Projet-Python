@@ -1,10 +1,10 @@
 
 # n is a string which values vary from 0 to 9 and from A to F
 def Hexa2Bin(n):
-    bin_number = list(format(int(n,16),'b'))
-    k = len(bin_number)
-    zeros = ['0' for i in range(4-k)]
-    return(zeros + bin_number)
+	bin_number = list(format(int(n,16),'b'))
+	k = len(bin_number)
+	zeros = ['0' for i in range(4-k)]
+	return(zeros + bin_number)
 
 
 class Room:
@@ -15,21 +15,45 @@ class Room:
 	__n = 0
 	__m = 0
 
-    def __init__(self,n_m, obstacles):
-        self.__obstacles = obstacles
-        self.__n = n_m[0]
-        self.__m = n_m[1]
 
-    def __init__(self, n_x, n_y, file_in):
-    	"""
-    	Constructor used in Test class
-    	""" 
-        self.__n = n_x
-        self.__m = n_y
-        for i in range(n_x):
-	        line = file_in.readline().strip()
-    	    for j in list(line):
-        	    self.__obstacles.append(j)
+	def __init__(self,n_m, obstacles):
+		"""
+		Basical constructor
+		"""
+		self.__obstacles = obstacles
+		self.__n = n_m[0]
+		self.__m = n_m[1]
+
+	def __init__(self,room):
+		"""
+		constructor by copy
+		"""
+		self.__obstacles = room.get_obstacles()
+		self.__n = room.get_n()
+		self.__m = room.get_m()
+
+	def __init__(self, n_x, n_y, file_in):
+		"""
+		Constructor used in Test class
+		""" 
+		self.__n = n_x
+		self.__m = n_y
+		for i in range(n_x):
+			line = file_in.readline().strip()
+		for j in list(line):
+			self.__obstacles.append(j)
+
+	def get_walls(self,index):
+		return Hexa2bin(self.__obstacles(index))
+
+	def get_n(self):
+		return self.__n
+
+	def get_m(self):
+		return self.__m
+
+	def get_obstacles(self):
+		return self.__obstacles
 
 	def has_wall(self,index,direction):
 		"""
@@ -45,10 +69,5 @@ class Room:
 			return Hexa2Bin(self.__obstacles(index))[3] == '1'
 		else: 
 			print("ERROR: Direction Not Recognised")
-			return True
+			return True        
 
-    def get_walls(self,index):
-        return Hexa2bin(self.__obstacles(index))
-        
-        
-        
